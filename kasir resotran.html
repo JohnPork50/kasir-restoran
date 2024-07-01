@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kasir Restoran</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .menu-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+    #cart {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>Kasir Restoran</h1>
+
+<div id="menu">
+    <div class="menu-item" onclick="addToCart('Nasi Goreng', 15000)">Nasi Goreng - Rp 15,000</div>
+    <div class="menu-item" onclick="addToCart('Mie Ayam', 12000)">Mie Ayam - Rp 12,000</div>
+    <div class="menu-item" onclick="addToCart('Sate Ayam', 20000)">Sate Ayam - Rp 20,000</div>
+    <div class="menu-item" onclick="addToCart('Es Teh', 5000)">Es Teh - Rp 5,000</div>
+    <div class="menu-item" onclick="addToCart('Es Jeruk', 6000)">Es Jeruk - Rp 6,000</div>
+    <div class="menu-item" onclick="addToCart('Air Mineral', 3000)">Air Mineral - Rp 3,000</div>
+</div>
+
+<div id="cart">
+    <h2>Keranjang Belanja</h2>
+    <ul id="cart-items">
+    </ul>
+    <h3>Total: Rp <span id="total">0</span></h3>
+    <button onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+var cart = [];
+var total = 0;
+
+function addToCart(item, price) {
+    cart.push({ item: item, price: price });
+    total += price;
+    updateCart();
+}
+
+function updateCart() {
+    var cartItemsElement = document.getElementById("cart-items");
+    var totalElement = document.getElementById("total");
+    cartItemsElement.innerHTML = "";
+    cart.forEach(function(item) {
+        var li = document.createElement("li");
+        li.textContent = item.item + " - Rp " + item.price;
+        cartItemsElement.appendChild(li);
+    });
+    totalElement.textContent = total;
+}
+
+function checkout() {
+    alert("Total pembayaran: Rp " + total);
+}
+</script>
+</body>
+</html>
